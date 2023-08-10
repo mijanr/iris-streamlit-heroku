@@ -1,1 +1,1 @@
-{"C": 7.09066874230356, "penalty": "l1", "solver": "saga"}
+{"C": 3.2270326839091386, "penalty": "l2", "solver": "saga"}
