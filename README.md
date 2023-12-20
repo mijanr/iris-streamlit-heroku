@@ -3,6 +3,29 @@ This repository contains the code for a web app that uses a machine learning mod
 
 The web app can be accessed at: https://iris-streamlit-heroku-085ce6246a15.herokuapp.com/
 
+### Commands to run the web app locally
+To run and check fastapi:
+```
+uvicorn app:app --reload
+```
+This will run the app on:
+```
+http://127.0.0.1:8000/
+```
+To run and check streamlit:
+```
+streamlit run app.py
+```
+This will run the app on:
+```
+http://localhost:8501/
+```
+FastAPI endpoints:
+```
+http://127.0.0.1:8000/docs
+```
+This will show the swagger UI for the API.
+
 ## Requirements
 requirements.yml file contains the list of all the packages required to run the code in this repository. requirements.yml is generated using the following command:
 
