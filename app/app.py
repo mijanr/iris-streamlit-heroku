@@ -2,10 +2,10 @@
 Create a Streamlit app that takes in features about the iris flower and returns the species of the flower.
 """
 import streamlit as st
-from main import IrisModel
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.datasets import load_iris
+import requests
 
 def load_data():
     iris = load_iris()
@@ -15,22 +15,35 @@ def load_data():
 
 
 def app():
-    model = IrisModel()
-    # load model
-    model.load()
-
+    
+    # Add title and description
     st.title("Predicting Iris Flower Species")
 
-    sepal_length = float(st.number_input("Sepal Length (cm)"))
-    sepal_width = float(st.number_input("Sepal Width (cm)"))
-    petal_length = float(st.number_input("Petal Length (cm)"))
-    petal_width = float(st.number_input("Petal Width (cm)"))
+    # Sidebar with input fields
+    sepal_length = st.slider("Sepal Length", 0.0, 10.0, 5.0)
+    sepal_width = st.slider("Sepal Width", 0.0, 10.0, 5.0)
+    petal_length = st.slider("Petal Length", 0.0, 10.0, 5.0)
+    petal_width = st.slider("Petal Width", 0.0, 10.0, 5.0)
+
+    # Create input data (dictionary)
+    input_data = {
+        "sepal_length": sepal_length,
+        "sepal_width": sepal_width,
+        "petal_length": petal_length,
+        "petal_width": petal_width
+    }
+
+    # interact with FastAPI endpoint
+    response = requests.post("http://127.0.0.1:8000/predict", json=input_data)
 
     target_names = ['Setosa', 'Versicolor', 'Virginica']
     if st.button("Predict"):
-        species = model.predict([[sepal_length, sepal_width, petal_length, petal_width]])
-        probas = model.predict_proba([[sepal_length, sepal_width, petal_length, petal_width]])
-        st.write(f"Species predicted: {target_names[species[0]]} with {probas.max()*100:.2f}% confidence")
+        # make a post request to the FastAPI endpoint
+        prediction = int(response.json()[0])
+        pred_prob = response.json()[1]
+
+        # print results
+        st.write(f"Species predicted: {target_names[prediction]} with {pred_prob:.2f}% confidence")
 
     # We will plot how the train data clusters in 2D space and then see how the test data fits in it.
     # First apply PCA to reduce the dimensionality of the data to 2D
@@ -45,6 +58,7 @@ def app():
     fig, ax = plt.subplots()
     for i in range(3):
         ax.scatter(X_pca[y==i, 0], X_pca[y==i, 1], label=target_names[i])
+        
     # Use "test_data" as label for the test data
     ax.scatter(data_test[:, 0], data_test[:, 1], c='red', marker='x', s=100, label='test_data')
     ax.set_xlabel('First Principal Component')
