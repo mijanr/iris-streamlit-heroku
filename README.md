@@ -37,3 +37,13 @@ To create a conda environment using the requirements.yml file, run the following
 ```
 conda env create -f requirements.yml
 ```
+
+Heroku requires a requirements.txt file. We will use pipreqs to generate the requirements.txt file. To install pipreqs, run the following command:
+
+```
+pipreqs ./
+```
+if you already have the requirement.txt
+```
+pipreqs --force ./
+```
