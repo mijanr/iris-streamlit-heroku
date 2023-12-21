@@ -4,9 +4,9 @@ This repository contains the code for a web app that uses a machine learning mod
 The web app can be accessed at: https://iris-streamlit-heroku-085ce6246a15.herokuapp.com/
 
 ### Commands to run the web app locally
-To run and check fastapi:
+To run and check fastapi back-end server: 
 ```
-uvicorn app:app --reload
+uvicorn main:app --reload
 ```
 This will run the app on:
 ```
@@ -14,7 +14,7 @@ http://127.0.0.1:8000/
 ```
 To run and check streamlit:
 ```
-streamlit run app.py
+streamlit run app/app.py
 ```
 This will run the app on:
 ```
