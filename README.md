@@ -3,6 +3,9 @@ This repository contains the code for a web app that uses a machine learning mod
 
 The web app can be accessed at: https://iris-streamlit-heroku-085ce6246a15.herokuapp.com/
 
+## Heroku support removed for now
+To run the web app locally, follow the instructions below.
+
 ### Commands to run the web app locally
 To run and check fastapi back-end server: 
 ```
