@@ -29,6 +29,9 @@ http://127.0.0.1:8000/docs
 ```
 This will show the swagger UI for the API.
 
+To stop the server, press ```Ctrl+C``` in the terminal.
+To stop the streamlit app, press ```Ctrl+C``` in the terminal.
+
 ## Requirements
 requirements.yml file contains the list of all the packages required to run the code in this repository. requirements.yml is generated using the following command:
 
